@@ -1,4 +1,4 @@
-package com.sun.common;
+package com.sun.common.jvm;
 
 import java.util.LinkedList;
 import java.util.Queue;

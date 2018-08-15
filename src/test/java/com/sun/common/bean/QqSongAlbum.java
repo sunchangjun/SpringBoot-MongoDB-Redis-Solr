@@ -1,7 +1,11 @@
-package com.sun.common;
+package com.sun.common.bean;
 
 import java.util.ArrayList;
-
+/**
+ * 对象内套对象,内部对象注意某些要求必须是static类
+ * @author sunchangjunn
+ * 2018年8月9日下午4:47:01
+ */
 public class QqSongAlbum {
 	int code;
 	Albumlib albumlib;
@@ -23,10 +27,11 @@ public class QqSongAlbum {
 		this.albumlib = albumlib;
 	}
 
-	 class Albumlib {
+	 public class Albumlib {
 		AlbumlibData data;
 			
 		int code;
+		
 		
 	
 
@@ -48,9 +53,9 @@ public class QqSongAlbum {
 
 	}
 
-	 static class AlbumlibData {
+	 public static class AlbumlibData {
+			int total;
 		ArrayList<Album> list;
-		int total;
 		
 		public int getTotal() {
 			return total;
@@ -70,7 +75,7 @@ public class QqSongAlbum {
 
 	}
 
-	static class Album {
+	 public static class Album {
 		long  album_id;
 		String album_mid;
 		String album_name;

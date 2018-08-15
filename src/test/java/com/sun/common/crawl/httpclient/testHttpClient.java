@@ -1,4 +1,4 @@
-package com.sun.common;
+package com.sun.common.crawl.httpclient;
 
 import java.io.IOException;
 
