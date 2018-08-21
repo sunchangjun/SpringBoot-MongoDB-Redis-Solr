@@ -24,6 +24,8 @@ public class gcForTest {
     	aList.add(a);
     	aList.add(b);
     	
+    	 
+    	
 //    	aList.clear();
     	System.out.println("a = " + a);
     	  a = null;
