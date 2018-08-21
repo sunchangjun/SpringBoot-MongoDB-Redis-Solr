@@ -11,13 +11,11 @@ import java.util.List;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
+//import org.junit.Test;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.junit.Test;
-
 import com.alibaba.fastjson.JSONObject;
-
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -32,7 +30,7 @@ import org.slf4j.LoggerFactory;
 public class CrawlSinger {
 	private static final Logger logger = LoggerFactory.getLogger(CrawlSinger.class);
 
-	@Test
+//	@Test
 	public void test() {
 		String root="https://y.qq.com/portal/singer_list.html#index=%s&area=%s&sex=%s&genre=%s&page=1&";
 		String areas="200";
