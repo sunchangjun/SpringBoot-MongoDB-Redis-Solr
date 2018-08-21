@@ -1,0 +1,54 @@
+Index: src/test/java/com/sun/common/gc/GcTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/java/com/sun/common/gc/GcTest.java	(date 1534833126086)
++++ src/test/java/com/sun/common/gc/GcTest.java	(date 1534833126086)
+@@ -0,0 +1,15 @@
++package com.sun.common.gc;
++import com.sun.base.BaseJunitTest;
++import org.junit.Test;
++
++/**
++ *
++ */
++public class GcTest extends BaseJunitTest {
++
++    @Test
++    public  void test(){
++        System.out.print("1");
++        Runtime.getRuntime().gc();
++    }
++}
+Index: src/main/java/com/sun/crawl/CrawlSinger.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/com/sun/crawl/CrawlSinger.java	(revision 7f69242da4c8ae3ad42d841f7fd1ad67f3bbc6cf)
++++ src/main/java/com/sun/crawl/CrawlSinger.java	(date 1534832681900)
+@@ -11,13 +11,11 @@
+ import org.apache.commons.collections.CollectionUtils;
+ import org.apache.commons.lang3.StringUtils;
+ import org.jsoup.Jsoup;
++//import org.junit.Test;
+ import org.jsoup.nodes.Document;
+ import org.jsoup.nodes.Element;
+ import org.jsoup.select.Elements;
+-import org.junit.Test;
+-
+ import com.alibaba.fastjson.JSONObject;
+-
+ import com.gargoylesoftware.htmlunit.BrowserVersion;
+ import com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController;
+ import com.gargoylesoftware.htmlunit.WebClient;
+@@ -32,7 +30,7 @@
+ public class CrawlSinger {
+ 	private static final Logger logger = LoggerFactory.getLogger(CrawlSinger.class);
+ 
+-	@Test
++//	@Test
+ 	public void test() {
+ 		String root="https://y.qq.com/portal/singer_list.html#index=%s&area=%s&sex=%s&genre=%s&page=1&";
+ 		String areas="200";
