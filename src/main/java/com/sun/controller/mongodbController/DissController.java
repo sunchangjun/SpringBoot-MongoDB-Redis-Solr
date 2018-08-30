@@ -27,6 +27,12 @@ public class DissController {
 
 	@Autowired
 	protected MongoTemplate mongoTemplate;
+	
+	@GetMapping("/getOne")
+	public Object getOne() {
+		
+		return "歌单";
+	}
 
 	@GetMapping("/find")
 	public void find() {
