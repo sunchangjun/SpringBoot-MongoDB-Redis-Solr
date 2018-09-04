@@ -3,12 +3,19 @@
  */
 package com.sun.common.jedis;
 
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 import redis.clients.jedis.exceptions.JedisException;
+
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author sunchangjunn
@@ -144,8 +151,6 @@ public class JedisUtils {
 		try {
 			jedis = getResource();
 			result= jedis.lpop (key);
-
-
 		} catch (Exception e) {
 			logger.info(e.getMessage());
 		} finally {
@@ -155,12 +160,16 @@ public class JedisUtils {
 	}
 
 	/*设置缓存*/
-	public static String set(String key,String value) {
+	public static String set(String key,Object value) {
 		String result = null;
 		Jedis jedis = null;
 		try {
 			jedis = getResource();
-			result = jedis.set(key,value);
+            if (value instanceof  String){
+                result = jedis.set(key,(String) value);
+            }else{
+                result = jedis.set(key,JSONObject.toJSONString(value));
+            }
 		} catch (Exception e) {
 			logger.info(e.getMessage());
 		} finally {
@@ -183,15 +192,13 @@ public class JedisUtils {
 		}
 		return result;
 	}
-
-
-	/*查询key是否存在*/
-	public static Boolean lrem(String key) {
-		Boolean result = null;
+	/*删除key*/
+	public static Long del(String key) {
+		Long result = null;
 		Jedis jedis = null;
 		try {
 			jedis = getResource();
-			result = jedis.exists(key);
+			result = jedis.del(key);
 		} catch (Exception e) {
 			logger.info(e.getMessage());
 		} finally {
@@ -214,4 +221,183 @@ public class JedisUtils {
 		}
 		return result;
 	}
+
+
+    /*设置缓存并设置过期时间(秒)*/
+    public static String setex (String key,int seconds ,String value) {
+        String result = null;
+        Jedis jedis = null;
+        try {
+            jedis = getResource();
+            result = jedis.setex (key,seconds,value);
+        } catch (Exception e) {
+            logger.info(e.getMessage());
+        } finally {
+            returnResource(jedis);
+        }
+        return result;
+    }
+
+    /*设置对象列表缓存*/
+    public static <T> boolean setList(String key, List<T> list) {
+        Jedis jedis = null;
+        String result = null;
+        try {
+            jedis = getResource();
+            if (jedis != null) {
+                for (T vz : list) {
+                    if (vz instanceof String) {
+                        jedis.lpush(key, (String) vz);
+                    } else {
+                        String  objectJson=JSONObject.toJSONString(vz);
+                        jedis.lpush(key, objectJson);
+                    }
+                }
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            logger.info(e.getMessage());
+            return false;
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    /*返回列表对象*/
+	public static <T> List<T> getListEntity(String key, Class<T> entityClass) {
+        Jedis jedis = null;
+        String result = null;
+		try {
+            jedis = getResource();
+			if (jedis != null) {
+				List<String> valueJson = jedis.lrange(key, 0, -1);
+				JSONArray json = new JSONArray();
+				json.addAll(valueJson);
+                return	JSONObject.parseArray(JSONObject.toJSONString(json),entityClass);
+			} else {
+				return null;
+			}
+		} catch (Exception e) {
+            logger.info(e.getMessage());
+			return null;
+		} finally {
+			returnResource(jedis);
+		}
+	}
+
+    /*设置map*/
+    public static <K, V> boolean setMap(String key, Map<String, V> map) {
+        Jedis jedis = null;
+        String result = null;
+        try {
+            jedis = getResource();
+            if (jedis != null) {
+                Set<Map.Entry<String, V>> entry = map.entrySet();
+                for (Iterator<Map.Entry<String, V>> ite = entry.iterator(); ite.hasNext();) {
+                    Map.Entry<String, V> kv = ite.next();
+                    if (kv.getValue() instanceof String) {
+                        jedis.hset(key, kv.getKey(), (String) kv.getValue());
+                    } else if (kv.getValue() instanceof List) {
+                        jedis.hset(key, kv.getKey(), JSONObject.toJSONString(kv.getValue()));
+                    } else {
+                        jedis.hset(key, kv.getKey(), JSONObject.toJSONString(kv.getValue()));
+                    }
+                }
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+
+    /*返回Map*/
+	public static <K, V> Map<String, V> getMap(String key) {
+            Jedis jedis = null;
+		try {
+            jedis = getResource();
+			if (jedis != null) {
+				Map<String, V> map = (Map<String, V>) jedis.hgetAll(key);
+				return map;
+			} else {
+				return null;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			returnResource(jedis);
+		}
+	}
+    /* incr(key)：名称为key的string增1操作 */
+    public static boolean incr(String key) {
+        Jedis jedis = null;
+        try {
+            jedis = getResource();
+            jedis.incr(key);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    /**
+     * incrby(key, integer)：名称为key的string增加integer
+     */
+    public static boolean incrBy(String key, int value) {
+        Jedis jedis = null;
+        try {
+            jedis = getResource();
+            jedis.incrBy(key, value);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    /**   * decr(key)：名称为key的string减1操作  */
+    public static boolean decr(String key) {
+        Jedis jedis = null;
+        try {
+            jedis = getResource();
+            jedis.decr(key);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    /**
+     * decrby(key, integer)：名称为key的string减少integer
+     */
+    public static boolean decrBy(String key, int value) {
+        Jedis jedis = null;
+        try {
+            jedis = getResource();
+            jedis.decrBy(key, value);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
 }
