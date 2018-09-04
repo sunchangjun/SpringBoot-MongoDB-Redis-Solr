@@ -27,7 +27,7 @@ public class JedisUtils {
     private static int PORT = 6379;
     
     //访问密码
-    private static String AUTH = "";
+    private static String AUTH = "scj19890606";
     
     //可用连接实例的最大数目，默认值为8；
     //如果赋值为-1，则表示不限制；如果pool已经分配了maxActive个jedis实例，则此时pool的状态为exhausted(耗尽)。
@@ -52,8 +52,8 @@ public class JedisUtils {
             config.setMaxIdle(MAX_IDLE);
             config.setMaxWaitMillis(MAX_WAIT);
             config.setTestOnBorrow(TEST_ON_BORROW);
-//            jedisPool = new JedisPool(config, ADDR, PORT, TIMEOUT, AUTH);
-            jedisPool = new JedisPool(config, ADDR, PORT, TIMEOUT);
+           jedisPool = new JedisPool(config, ADDR, PORT, TIMEOUT, AUTH);
+//            jedisPool = new JedisPool(config, ADDR, PORT, TIMEOUT);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -77,22 +77,14 @@ public class JedisUtils {
 		}
 		return jedis;
 	}
-	/**
-	 * 归还资源
-	 * @param jedis
-	 * @param isBroken
-	 */
+
 	public static void returnBrokenResource(Jedis jedis) {
 		if (jedis != null) {
 			jedisPool.returnBrokenResource(jedis);
 		}
 	}
 	
-	/**
-	 * 释放资源
-	 * @param jedis
-	 * @param isBroken
-	 */
+
 	public static void returnResource(Jedis jedis) {
 		if (jedis != null) {
 			jedisPool.returnResource(jedis);
@@ -100,13 +92,7 @@ public class JedisUtils {
 	}
 
 
-	/**
-	 * 设置缓存
-	 * @param key 键
-	 * @param value 值
-	 * @param cacheSeconds 超时时间，0为不超时
-	 * @return
-	 */
+	/*获取缓存*/
 	public static String get(String key) {
 		String result = null;
 		Jedis jedis = null;
@@ -116,7 +102,113 @@ public class JedisUtils {
 		
 	
 		} catch (Exception e) {
+			logger.info(e.getMessage());
+		} finally {
+			returnResource(jedis);
+		}
+		return result;
+	}
 
+
+	/**
+	 * 向链表尾部插入元素
+	 * @param key
+	 * @param value
+	 * @return
+	 */
+	public static Long rpush(String key,String value) {
+		Long result = null;
+		Jedis jedis = null;
+		try {
+			jedis = getResource();
+			result= jedis.rpush(key,value);
+
+
+		} catch (Exception e) {
+			logger.info(e.getMessage());
+		} finally {
+			returnResource(jedis);
+		}
+		return result;
+	}
+
+
+	/**
+	 * 移除并返回链表头部的元素
+	 * @param key
+	 * @return
+	 */
+	public static String lpop (String key) {
+		String result = null;
+		Jedis jedis = null;
+		try {
+			jedis = getResource();
+			result= jedis.lpop (key);
+
+
+		} catch (Exception e) {
+			logger.info(e.getMessage());
+		} finally {
+			returnResource(jedis);
+		}
+		return result;
+	}
+
+	/*设置缓存*/
+	public static String set(String key,String value) {
+		String result = null;
+		Jedis jedis = null;
+		try {
+			jedis = getResource();
+			result = jedis.set(key,value);
+		} catch (Exception e) {
+			logger.info(e.getMessage());
+		} finally {
+			returnResource(jedis);
+		}
+		return result;
+	}
+
+	/*删除链表中的元素*/
+	public static Long lrem(String key,long count,String value) {
+		Long result = null;
+		Jedis jedis = null;
+		try {
+			jedis = getResource();
+			result = jedis.lrem (key,count,value);
+		} catch (Exception e) {
+			logger.info(e.getMessage());
+		} finally {
+			returnResource(jedis);
+		}
+		return result;
+	}
+
+
+	/*查询key是否存在*/
+	public static Boolean lrem(String key) {
+		Boolean result = null;
+		Jedis jedis = null;
+		try {
+			jedis = getResource();
+			result = jedis.exists(key);
+		} catch (Exception e) {
+			logger.info(e.getMessage());
+		} finally {
+			returnResource(jedis);
+		}
+		return result;
+	}
+
+	/*查询key的生命周期(毫秒)*/
+	public static Long pttl  (String key) {
+		Long result = null;
+		Jedis jedis = null;
+		try {
+			jedis = getResource();
+			result = jedis.pttl  (key);
+		} catch (Exception e) {
+			logger.info(e.getMessage());
 		} finally {
 			returnResource(jedis);
 		}
