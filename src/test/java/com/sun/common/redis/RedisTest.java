@@ -7,6 +7,7 @@ import com.sun.mysql.entity.Album;
 import org.junit.Test;
 
 import com.sun.common.jedis.JedisUtils;
+import redis.clients.jedis.Jedis;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,7 +20,7 @@ import java.util.Map;
  */
 public class RedisTest {
 	
-	@Test
+//	@Test
 	public void  test() {
 //		/*set*/
 //		List<Album> list=new ArrayList<Album>();
@@ -35,6 +36,7 @@ public class RedisTest {
 //		Map map=new HashMap();
 //		map.put("10086","中国移动");
 //		map.put("10001","中国电信");
+//		map.put("10010","中国联通");
 //		System.out.println("setMap:"+	JedisUtils.setMap("map",map));
 //
 //
@@ -47,9 +49,11 @@ public class RedisTest {
 		JedisUtils.setex("love",1000,"my love");
 
 
+
+
 		/*Get*/
-		Map map=JedisUtils.getMap("classMap");
-		System.out.println(map.get("album"));
+//		Map map=JedisUtils.getMap("classMap");
+//		System.out.println(map.get("album"));
 
 
 		/*统计*/
@@ -57,5 +61,16 @@ public class RedisTest {
 		System.out.println(JedisUtils.get("count"));
 
 
+
+
+	}
+	@Test
+	public void redis(){
+		Jedis jedis=JedisUtils.getResource();
+		String key="REQUEST_"+":"+"用户的url";
+		jedis.set(key, "随意");
+		jedis.expire(key,1000);
+		jedis.set("TABLE"+":"+"value","value");
+		JedisUtils.returnResource(jedis);
 	}
 }

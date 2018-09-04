@@ -238,6 +238,67 @@ public class JedisUtils {
         return result;
     }
 
+    /*设置缓存并设置过期时间(耗秒)*/
+    public static String psetex (String key,int seconds ,String value) {
+        String result = null;
+        Jedis jedis = null;
+        try {
+            jedis = getResource();
+            result = jedis.psetex (key,seconds,value);
+        } catch (Exception e) {
+            logger.info(e.getMessage());
+        } finally {
+            returnResource(jedis);
+        }
+        return result;
+    }
+
+    /*设置某时间点过期(秒)*/
+    public static Long expireAt (String key,long timestamp ,String value) {
+        Long result = null;
+        Jedis jedis = null;
+        try {
+            jedis = getResource();
+            jedis.set(key,value);
+            result = jedis.expireAt(key,timestamp);
+        } catch (Exception e) {
+            logger.info(e.getMessage());
+        } finally {
+            returnResource(jedis);
+        }
+        return result;
+    }
+
+    /*设置某时间点过期(毫秒)*/
+    public static Long pexpireAt (String key,long timestamp ,String value) {
+        Long result = null;
+        Jedis jedis = null;
+        try {
+            jedis = getResource();
+            jedis.set(key,value);
+            result = jedis.pexpireAt(key,timestamp);
+        } catch (Exception e) {
+            logger.info(e.getMessage());
+        } finally {
+            returnResource(jedis);
+        }
+        return result;
+    }
+    /*移除key的过期时间*/
+    public static Long persist (String key) {
+        Long result = null;
+        Jedis jedis = null;
+        try {
+            jedis = getResource();
+            jedis.persist(key);
+
+        } catch (Exception e) {
+            logger.info(e.getMessage());
+        } finally {
+            returnResource(jedis);
+        }
+        return result;
+    }
     /*设置对象列表缓存*/
     public static <T> boolean setList(String key, List<T> list) {
         Jedis jedis = null;
