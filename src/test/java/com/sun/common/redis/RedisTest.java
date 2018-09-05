@@ -20,7 +20,7 @@ import java.util.Map;
  */
 public class RedisTest {
 	
-//	@Test
+	@Test
 	public void  test() {
 //		/*set*/
 //		List<Album> list=new ArrayList<Album>();
@@ -44,33 +44,33 @@ public class RedisTest {
 //		map2.put("album",album);
 //		map2.put("album2",album2);
 //		System.out.println("setClassMap:"+	JedisUtils.setMap("classMap",map2));
-
+		System.out.println(JedisUtils.set("key","value"));
 		/*设置缓存并设置过期时间*/
-		JedisUtils.setex("love",1000,"my love");
+//		JedisUtils.setex("love",100,"my love");
 
 
 
 
 		/*Get*/
-//		Map map=JedisUtils.getMap("classMap");
-//		System.out.println(map.get("album"));
+
+//		System.out.println("GET:"+JedisUtils.get("123"));
 
 
-		/*统计*/
-		System.out.println("count:"+JedisUtils.incrBy("count",2));
-		System.out.println(JedisUtils.get("count"));
+//		/*统计*/
+//		System.out.println("count:"+JedisUtils.incrBy("count",2));
+//		System.out.println(JedisUtils.get("count"));
 
 
 
 
 	}
-	@Test
-	public void redis(){
-		Jedis jedis=JedisUtils.getResource();
-		String key="REQUEST_"+":"+"用户的url";
-		jedis.set(key, "随意");
-		jedis.expire(key,1000);
-		jedis.set("TABLE"+":"+"value","value");
-		JedisUtils.returnResource(jedis);
-	}
+//	@Test
+//	public void redis(){
+//		Jedis jedis=JedisUtils.getResource();
+//		String key="REQUEST_"+":"+"用户的url";
+//		jedis.set(key, "随意");
+//		jedis.expire(key,1000);
+//		jedis.set("TABLE"+":"+"value","value");
+//		JedisUtils.returnResource(jedis);
+//	}
 }

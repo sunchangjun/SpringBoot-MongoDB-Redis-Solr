@@ -106,8 +106,9 @@ public class JedisUtils {
 		try {
 			jedis = getResource();
 			result = jedis.get(key);
-		
-	
+		    if ("null".equals(result)){
+		        return  null;
+            }
 		} catch (Exception e) {
 			logger.info(e.getMessage());
 		} finally {
@@ -453,6 +454,22 @@ public class JedisUtils {
             jedis = getResource();
             jedis.decrBy(key, value);
             return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            returnResource(jedis);
+        }
+    }
+
+    /*检查key是否存在*/
+    public static boolean exists(String key) {
+        boolean result = false;
+        Jedis jedis = null;
+        try {
+            jedis = getResource();
+            result =   jedis.exists(key);
+            return result;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
