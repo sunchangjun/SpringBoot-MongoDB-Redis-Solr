@@ -9,6 +9,7 @@ import org.junit.Test;
 import com.sun.common.jedis.JedisUtils;
 import redis.clients.jedis.Jedis;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -44,11 +45,12 @@ public class RedisTest {
 //		map2.put("album",album);
 //		map2.put("album2",album2);
 //		System.out.println("setClassMap:"+	JedisUtils.setMap("classMap",map2));
-		System.out.println(JedisUtils.set("key","value"));
+//		System.out.println(JedisUtils.set("key","value"));
 		/*设置缓存并设置过期时间*/
 //		JedisUtils.setex("love",100,"my love");
 
-
+		File file=new File("D:\\pic\\万泰管理平台.png");
+		JedisUtils.set("fileKey",file);
 
 
 		/*Get*/
@@ -65,12 +67,13 @@ public class RedisTest {
 
 	}
 //	@Test
-//	public void redis(){
-//		Jedis jedis=JedisUtils.getResource();
-//		String key="REQUEST_"+":"+"用户的url";
-//		jedis.set(key, "随意");
-//		jedis.expire(key,1000);
-//		jedis.set("TABLE"+":"+"value","value");
-//		JedisUtils.returnResource(jedis);
-//	}
+	public void redis(){
+
+		Jedis jedis=JedisUtils.getResource();
+		String  key="file";
+		jedis.set(key, "");
+		jedis.expire(key,1000);
+		jedis.set("TABLE"+":"+"value","value");
+		JedisUtils.returnResource(jedis);
+	}
 }
