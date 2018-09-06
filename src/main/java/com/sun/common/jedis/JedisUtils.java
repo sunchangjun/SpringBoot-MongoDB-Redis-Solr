@@ -12,6 +12,7 @@ import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
 import redis.clients.jedis.exceptions.JedisException;
 
+import java.io.*;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -476,6 +477,75 @@ public class JedisUtils {
         } finally {
             returnResource(jedis);
         }
+    }
+
+    /* 获取缓存 */
+    public static String set(String key, File file) {
+        String result = null;
+        Jedis jedis = null;
+        try {
+            byte[] buffer = fileToBytes(file);
+            jedis = getResource();
+            result = jedis.set(key.getBytes(), buffer);
+            if ("null".equals(result)) {
+                return null;
+            }
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+        } finally {
+            returnResource(jedis);
+        }
+        return result;
+    }
+
+    /**
+     * 获得指定文件的byte数组
+     */
+    private static byte[] fileToBytes(File file) {
+        byte[] buffer = null;
+        try {
+            FileInputStream fis = new FileInputStream(file);
+            ByteArrayOutputStream bos = new ByteArrayOutputStream(1000);
+            byte[] b = new byte[1000];
+            int n;
+            while ((n = fis.read(b)) != -1) {
+                bos.write(b, 0, n);
+            }
+            fis.close();
+            bos.close();
+            buffer = bos.toByteArray();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return buffer;
+    }
+
+
+
+    /*
+     * 将redis中的数组读取出来转成输入流
+     */
+    public static InputStream getInputStream(String key) {
+        if (key == null || key.equals("")) {
+            return null;
+        }
+        Jedis jedis = null;
+        try {
+            jedis = getResource();
+            byte[] json = jedis.get(key.getBytes());// 取出数组
+            if (json != null && json.length > 0) {
+                InputStream inputStream = new ByteArrayInputStream(json);// 转流
+                return inputStream;
+            }
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+        } finally {
+            returnResource(jedis);
+        }
+        return null;
+
     }
 
 }
