@@ -29,7 +29,7 @@ public class JavaBeanFildTest {
         mongoDiss3.setDiss_id(3L);
         mongoDiss3.setDiss_name("心情好");
 
-        list.add(mongoDiss1);list.add(mongoDiss2);list.add(mongoDiss3);
+//        list.add(mongoDiss1);list.add(mongoDiss2);list.add(mongoDiss3);
 
         List<String> tableNames=list.stream().map(MongoDiss::getDiss_name).collect(Collectors.toList());
         System.out.println(tableNames);
