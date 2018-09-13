@@ -20,19 +20,12 @@ public class DissServiceImpl  implements DissService {
 
 
 
-//    @Cacheable(value = "sss", key = "'names:' + #id")
-//    public  List<MongoDiss>  find(Integer id){
-//        Query query = new Query(Criteria.where("song_list.$id").is(1280297));
-//        List<MongoDiss> dissList=mongoTemplate.find(query, MongoDiss.class);
-//        System.out.println(JSONObject.toJSONString(dissList));
-//        return dissList;
-//    }
-    @Cacheable(value = "diss", key = "'names' + #id")
-    public  String  find(Integer id){
+    @Cacheable(value="diss")
+    public  List<MongoDiss>  find(Integer id,String name){
         Query query = new Query(Criteria.where("song_list.$id").is(1280297));
         List<MongoDiss> dissList=mongoTemplate.find(query, MongoDiss.class);
         System.out.println(JSONObject.toJSONString(dissList));
-        String string= "redis缓存";
-        return string;
+        return dissList;
     }
+
 }

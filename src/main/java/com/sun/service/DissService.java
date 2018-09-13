@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface DissService {
 
-//    List<MongoDiss> find(Integer id);
-    String find(Integer id);
+    List<MongoDiss> find(Integer id,String name);
+//    String find(Integer id);
 }

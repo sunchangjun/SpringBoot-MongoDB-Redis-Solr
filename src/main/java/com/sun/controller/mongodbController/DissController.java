@@ -38,12 +38,13 @@ public class DissController {
 		
 		return "歌单";
 	}
-	int id=0;
+
 	@GetMapping("/find")
-	public void find() {
-		id++;
-		String dissList=	dissService.find(id);
+	public Object find() {
+
+		List<MongoDiss> dissList =	dissService.find(1,"sun");
 		System.out.println(JSONObject.toJSONString(dissList));
+		return dissList;
 	}
 
 	@GetMapping("/update")
