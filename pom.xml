@@ -26,29 +26,40 @@
 	</properties>
 
 	<dependencies>
-		<!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils -->
+		<!-- 对象拷贝 -->
 		<dependency>
 			<groupId>commons-beanutils</groupId>
 			<artifactId>commons-beanutils</artifactId>
 			<version>1.9.3</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/redis.clients/jedis -->
+		<!-- Redis -->
 		<dependency>
 			<groupId>redis.clients</groupId>
 			<artifactId>jedis</artifactId>
 			<version>2.9.0</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+			<version>2.0.3.RELEASE</version>
+		</dependency>
 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-cache</artifactId>
+		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-solr -->
-		<!-- <dependency> <groupId>org.springframework.data</groupId> <artifactId>spring-data-solr</artifactId> 
-			<version>3.0.6.RELEASE</version> </dependency> -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-pool2</artifactId>
+		</dependency>
+
+		<!--mongodb-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver -->
 		<dependency>
 			<groupId>org.mongodb</groupId>
 			<artifactId>mongo-java-driver</artifactId>
@@ -56,30 +67,31 @@
 		</dependency>
 
 
-
-		<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
-			<version>4.5.6</version>
-		</dependency>
-		<!-- https://mvnrepository.com/artifact/net.sourceforge.htmlunit/htmlunit -->
+		<!--爬虫工具-->
 		<dependency>
 			<groupId>net.sourceforge.htmlunit</groupId>
 			<artifactId>htmlunit</artifactId>
 			<version>2.27</version>
 		</dependency>
 		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>1.8.3</version>
+		</dependency>
+
+		<!--solr-->
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-solr</artifactId>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/de.codecentric/spring-boot-admin-server -->
+
+
+		<!--监控工具-->
 		<dependency>
 			<groupId>de.codecentric</groupId>
 			<artifactId>spring-boot-admin-server</artifactId>
 			<version>2.0.2</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/de.codecentric/spring-boot-admin-server-ui -->
 		<dependency>
 			<groupId>de.codecentric</groupId>
 			<artifactId>spring-boot-admin-server-ui</artifactId>
@@ -87,10 +99,39 @@
 		</dependency>
 
 
+		<!--http请求-->
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.6</version>
+		</dependency>
+		<!-- okhttp3 -->
+		<dependency>
+			<groupId>com.squareup.okhttp3</groupId>
+			<artifactId>okhttp</artifactId>
+			<version>3.8.1</version>
+		</dependency>
+		<!--Excel-->
+		<dependency>
+			<groupId>net.sourceforge.jexcelapi</groupId>
+			<artifactId>jxl</artifactId>
+			<version>2.6.12</version>
+		</dependency>
+
+
+
+		<!--系统-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+		<!--热部署-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+
+		</dependency>
+
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -98,36 +139,18 @@
 			<scope>test</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>org.jsoup</groupId>
-			<artifactId>jsoup</artifactId>
-			<version>1.8.3</version>
-		</dependency>
 
-		<!-- okhttp3 -->
-		<dependency>
-			<groupId>com.squareup.okhttp3</groupId>
-			<artifactId>okhttp</artifactId>
-			<version>3.8.1</version>
-		</dependency>
+
+		<!--工具-->
 		<!--alijson -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
-			<version>1.2.17</version>
+			<version>1.2.49</version>
 		</dependency>
+
 		<!-- 上传excel -->
-		<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi</artifactId>
-			<version>3.16</version>
-		</dependency>
-		<!-- 上传excel -->
-		<dependency>
-			<groupId>org.apache.poi</groupId>
-			<artifactId>poi-ooxml</artifactId>
-			<version>3.16</version>
-		</dependency>
+
 	</dependencies>
 
 	<build>
