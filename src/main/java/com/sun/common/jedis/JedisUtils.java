@@ -568,4 +568,29 @@ public class JedisUtils {
         return  result;
     }
 
+    /**
+     * 获取流
+     * @param key
+     * @return
+     */
+    public static InputStream  getStream(String key){
+        InputStream result = null;
+        Jedis jedis = null;
+        try {
+            jedis = getResource();
+          byte[]  bytes =   jedis.get(key.getBytes());
+          if(null != bytes){
+              result = new ByteArrayInputStream(bytes);
+          }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            returnResource(jedis);
+        }
+        return  result;
+    }
+
+
+
 }
