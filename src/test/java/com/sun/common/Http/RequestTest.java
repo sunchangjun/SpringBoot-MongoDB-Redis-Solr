@@ -1,4 +1,4 @@
-package com.sun.common.request;
+package com.sun.common.Http;
 
 import javax.servlet.http.HttpServletRequest;
 
