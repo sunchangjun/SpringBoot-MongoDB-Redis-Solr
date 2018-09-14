@@ -548,4 +548,24 @@ public class JedisUtils {
 
     }
 
+    /**
+     * 获取byte数组
+     * @param key
+     * @return
+     */
+    public static byte[]  getBytes(String key){
+        byte[] result = null;
+        Jedis jedis = null;
+        try {
+            jedis = getResource();
+            result =   jedis.get(key.getBytes());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            returnResource(jedis);
+        }
+        return  result;
+    }
+
 }

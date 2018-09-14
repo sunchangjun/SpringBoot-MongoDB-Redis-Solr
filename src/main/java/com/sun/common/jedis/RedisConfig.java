@@ -47,12 +47,6 @@ public class RedisConfig extends CachingConfigurerSupport {
 //    @Bean
 //    public CacheManager cacheManager(RedisConnectionFactory factory) {
 //
-//        FastJsonRedisSerializer<Object> fastJsonRedisSerializer = new FastJsonRedisSerializer<>(Object.class);
-//        Jackson2JsonRedisSerializer<Object> serializer = new Jackson2JsonRedisSerializer<Object>(Object.class);
-//        ObjectMapper objectMapper = new ObjectMapper();
-//        objectMapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
-//         objectMapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
-//         serializer.setObjectMapper(objectMapper);
 //
 //
 //
@@ -131,10 +125,6 @@ public class RedisConfig extends CachingConfigurerSupport {
             //格式为：com.frog.mvcdemo.controller.FrogTestController-show-[params]
             @Override
             public Object generate(Object target, Method method, Object... params) {
-                System.out.println("-------------"+JSONObject.toJSONString(target));
-                System.out.println("-------------"+JSONObject.toJSONString(method));
-                System.out.println("-------------"+JSONObject.toJSONString(params));
-
                 StringBuffer sb = new StringBuffer();
                 sb.append(target.getClass().getName());//类名
                 sb.append("-");
