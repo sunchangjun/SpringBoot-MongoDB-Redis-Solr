@@ -591,6 +591,110 @@ public class JedisUtils {
         return  result;
     }
 
+    /*向无序集合中添加元素*/
+    public static boolean sadd(String key,String value) {
+      boolean result =false;
+        Jedis jedis = null;
+        try {
+            jedis = getResource();
+            jedis.sadd(key,value);
+            result=true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            returnResource(jedis);
+        }
+        return result;
+    }
+    /*删除无序集合中某个元素*/
+    public static boolean srem(String key,String value) {
+        boolean result =false;
+        Jedis jedis = null;
+        try {
+            jedis = getResource();
+            jedis.srem(key,value);
+            result=true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            returnResource(jedis);
+        }
+        return result;
+    }
+    /*判断无序集合中是否有某元素存在*/
+    public static boolean sismember(String key,String value) {
+        boolean result =false;
+        Jedis jedis = null;
+        try {
+            jedis = getResource();
+            result =  jedis.sismember(key,value);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            returnResource(jedis);
+        }
+        return result;
+    }
+
+    /**
+     * 向有序集合中添加元素
+     * @param key
+     * @param soure  例如:收听数
+     * @param value
+     * @return
+     */
+    public static Long zadd(String key,double soure,String value) {
+        Long result =null;/*返回值:
+                                    被成功添加的新成员的数量，不包括那些被更新的、已经存在的成员。*/
+        Jedis jedis = null;
+        try {
+            jedis = getResource();
+            result =   jedis.zadd(key,soure,value);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            returnResource(jedis);
+        }
+        return result;
+    }
+
+    /*删除有序集合中某个元素*/
+    public static Long zadd(String key,String value) {
+        Long result =null;/*返回值:
+                                    被成功添加的新成员的数量，不包括那些被更新的、已经存在的成员。*/
+        Jedis jedis = null;
+        try {
+            jedis = getResource();
+            result =  jedis.zrem(key,value);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            returnResource(jedis);
+        }
+        return result;
+    }
+
+
+    /*查询值在有序集合中的排名*/
+    public static Long zrevrank (String key,String value) {
+        Long result =null;/*返回值:
+                                    被成功添加的新成员的数量，不包括那些被更新的、已经存在的成员。*/
+        Jedis jedis = null;
+        try {
+            jedis = getResource();
+            result =  jedis.zrevrank (key,value);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            returnResource(jedis);
+        }
+        return result;
+    }
 
 
 }
