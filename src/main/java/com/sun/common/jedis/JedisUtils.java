@@ -697,4 +697,34 @@ public class JedisUtils {
     }
 
 
+    /*查询值在区间的数量:如薪水在多少到多少有多少数量*/
+    public static Long zcount  (String key,double min,double max ) {
+        Long result =null;//score 值在 min 和 max 之间的成员的数量。
+        Jedis jedis = null;
+        try {
+            jedis = getResource();
+            result =  jedis.zcount (key,min,max);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            returnResource(jedis);
+        }
+        return result;
+    }
+
+    /*返回名次在开始和结束之间的元素*/
+    public static Set<String> zrange  (String key,long start,long end ) {
+        Set<String> result =null;//score 值在 min 和 max 之间的成员的数量。
+        Jedis jedis = null;
+        try {
+            jedis = getResource();
+            result =  jedis.zrange (key,start,end);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            returnResource(jedis);
+        }
+        return result;
+    }
+
 }
