@@ -3,6 +3,7 @@
  */
 package com.sun.common.redis;
 
+import com.sun.common.jedis.RedisUtils;
 import com.sun.mysql.entity.Album;
 import org.junit.Test;
 
@@ -21,7 +22,7 @@ import java.util.Map;
  */
 public class RedisTest {
 	
-	@Test
+//	@Test
 	public void  test() {
 //		/*set*/
 //		List<Album> list=new ArrayList<Album>();
@@ -48,11 +49,11 @@ public class RedisTest {
 //		System.out.println(JedisUtils.set("key","value"));
 		/*设置缓存并设置过期时间*/
 //		JedisUtils.setex("love",100,"my love");
-		System.out.println(JedisUtils.zadd("zset",50,"SongId:10086"));
-		System.out.println(JedisUtils.zadd("zset",101,"SongId:10001"));
-		System.out.println(JedisUtils.zrevrank("zset","SongId:10086"));
-		System.out.println(JedisUtils.zrevrank("zset","SongId:10086"));
-		System.out.println(JedisUtils.sismember("zset","SongId:10086"));
+//		System.out.println(JedisUtils.zadd("zset",50,"SongId:10086"));
+//		System.out.println(JedisUtils.zadd("zset",101,"SongId:10001"));
+//		System.out.println(JedisUtils.zrevrank("zset","SongId:10086"));
+//		System.out.println(JedisUtils.zrevrank("zset","SongId:10086"));
+//		System.out.println(JedisUtils.sismember("zset","SongId:10086"));
 		/*Get*/
 
 //		System.out.println("GET:"+JedisUtils.get("123"));
@@ -75,5 +76,10 @@ public class RedisTest {
 		jedis.expire(key,1000);
 		jedis.set("TABLE"+":"+"value","value");
 		JedisUtils.returnResource(jedis);
+	}
+	@Test
+	public void testRedis2(){
+		RedisUtils.set("redis2","redis22");
+		JedisUtils.set("redis1","redis11");
 	}
 }

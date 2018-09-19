@@ -26,6 +26,20 @@
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.apache.tika</groupId>
+			<artifactId>tika-core</artifactId>
+			<version>1.18</version>
+		</dependency>
+
+		<!--谷歌二维码生成工具-->
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>javase</artifactId>
+			<version>3.3.3</version>
+		</dependency>
+
+
 		<!-- 对象拷贝 -->
 		<dependency>
 			<groupId>commons-beanutils</groupId>
