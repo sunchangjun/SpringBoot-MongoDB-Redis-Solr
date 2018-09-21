@@ -11,8 +11,8 @@ import java.util.Date;
 public class SynchronizeBookmarkToRedis {
 
     public static void main(String[] args) {
-//        run();
-        down();
+        run();
+//        down();
     }
 
     /**
@@ -21,7 +21,8 @@ public class SynchronizeBookmarkToRedis {
     public static void run() {
         System.out.println("开始上传");
      long begin =   System.currentTimeMillis();
-        File file = new File("D:\\File\\pdf\\图解设计模式@www.java1234.com.pdf");
+        String filePath="D:\\File\\bookmarks_2018_9_21.html";
+        File file = new File(filePath);
 
         //我要获取当前的日期
         Date date = new Date();
@@ -47,7 +48,7 @@ public class SynchronizeBookmarkToRedis {
         //获取String类型的时间
         String createdate = sdf.format(date);
         try{
-        String filePath="D:\\book\\";
+        String filePath="D:\\File\\bookmarks_2018_9_21.html";
         String filePathAndName = filePath+key+".pdf";
         //创建不同的文件夹目录
              File file =new File(filePath);

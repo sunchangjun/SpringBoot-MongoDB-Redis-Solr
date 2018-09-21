@@ -11,6 +11,9 @@ public class StringSub {
         String st= StringUtils.substringAfter(str,"未找到歌曲信息:");
         System.out.println(st);
 
+        String str1= "我喜欢:你:";
+        System.out.println(StringUtils.substringBetween(str1,":",":"));
+
     }
 
 }

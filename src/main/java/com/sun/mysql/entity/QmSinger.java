@@ -1,8 +1,9 @@
 package com.sun.mysql.entity;
 
+import com.sun.mysql.entity.QmRes;
 import com.sun.rnum.QmResType;
 
-public class QmSinger extends QmRes{
+public class QmSinger extends QmRes {
     private Long singerId;
 
     private String singerName;

@@ -4,7 +4,6 @@ import com.alibaba.fastjson.JSONObject;
 
 import com.sun.Mongodb.entity.MongoSong;
 import com.sun.base.BaseJunitTest;
-import org.apache.commons.collections.CollectionUtils;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,7 +13,6 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 
 import java.util.Map.Entry;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

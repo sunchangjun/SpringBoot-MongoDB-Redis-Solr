@@ -2,7 +2,6 @@ package com.sun.mongodb;
 
 import com.alibaba.fastjson.JSONObject;
 import com.sun.Mongodb.entity.MongoDiss;
-import com.sun.Mongodb.entity.MongoSong;
 import com.sun.base.BaseJunitTest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class MongoDBPage extends BaseJunitTest {
     @Autowired

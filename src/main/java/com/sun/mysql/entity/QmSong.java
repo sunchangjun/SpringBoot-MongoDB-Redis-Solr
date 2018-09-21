@@ -1,8 +1,10 @@
-package  com.sun.mysql.entity;
+package com.sun.mysql.entity;
+
+import com.sun.mysql.entity.QmRes;
 
 import java.util.Date;
 
-public class QmSong extends QmRes{
+public class QmSong extends QmRes {
     private Long songId;
     private Long singerId;
     private Long albumId;

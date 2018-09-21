@@ -4,12 +4,10 @@
 package com.sun.common.gc;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.Test;
 
 import com.alibaba.fastjson.JSONObject;
-import com.sun.mysql.entity.Album;
 
 /**
  * @author sunchangjunn

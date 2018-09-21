@@ -4,17 +4,10 @@
 package com.sun.common.redis;
 
 import com.sun.common.jedis.RedisUtils;
-import com.sun.mysql.entity.Album;
 import org.junit.Test;
 
 import com.sun.common.jedis.JedisUtils;
 import redis.clients.jedis.Jedis;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * @author sunchangjunn
