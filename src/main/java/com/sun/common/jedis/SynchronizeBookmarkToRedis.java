@@ -9,29 +9,31 @@ import java.util.Date;
  * redis上传下载最新书签
  */
 public class SynchronizeBookmarkToRedis {
+	
+	private static final String localPath="D:\\File\\";
 
     public static void main(String[] args) {
-        run();
-//        down();
+//        run("");
+        down();
     }
 
     /**
      * 上传书签到redis
      */
-    public static void run() {
+    public static void run(String  fileNam) {
         System.out.println("开始上传");
      long begin =   System.currentTimeMillis();
-        String filePath="D:\\File\\bookmarks_2018_9_21.html";
+        String filePath=localPath+fileNam+".html";
         File file = new File(filePath);
 
         //我要获取当前的日期
         Date date = new Date();
         //设置要获取到什么样的时间
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         //获取String类型的时间
         String createdate = sdf.format(date);
         String fileName =   file.getName();
-        JedisUtils.set(createdate+"_"+fileName, file);
+        JedisUtils.set("chrome_book", file);
         long end =   System.currentTimeMillis();
         System.out.println(end-begin+"毫秒");
     }
@@ -40,7 +42,7 @@ public class SynchronizeBookmarkToRedis {
      * 从redis下载书签
      */
     public static void down() {
-        String key ="2018-09-17_图解设计模式@www.java1234.com.pdf";
+        String key ="chrome_book";
         //我要获取当前的日期
         Date date = new Date();
         //设置要获取到什么样的时间
@@ -48,10 +50,10 @@ public class SynchronizeBookmarkToRedis {
         //获取String类型的时间
         String createdate = sdf.format(date);
         try{
-        String filePath="D:\\File\\bookmarks_2018_9_21.html";
-        String filePathAndName = filePath+key+".pdf";
+//        String filePath=localPath+"chorm_book_"+createdate+".html";
+        String filePathAndName = localPath+key+"_"+createdate+".html";
         //创建不同的文件夹目录
-             File file =new File(filePath);
+             File file =new File(localPath);
        //判断文件夹是否存在
             if  (!file .exists()  && !file .isDirectory())
             { System.out.println("//不存在");
