@@ -1,4 +1,4 @@
-package com.sun.mongodb;
+package com.sun.MongoDB;
 
 import com.alibaba.fastjson.JSONObject;
 

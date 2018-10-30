@@ -1,4 +1,4 @@
-package com.sun.common.Exception;
+package com.sun.common.Excel;
 
 @SuppressWarnings("serial")
 public class ExcelException extends Exception {    
