@@ -21,7 +21,7 @@ import com.gargoylesoftware.htmlunit.NicelyResynchronizingAjaxController;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import com.sun.mysql.entity.QmSinger;
-import com.sun.common.JsonForMat;
+import com.sun.common.conversion.JsonForMat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 /**

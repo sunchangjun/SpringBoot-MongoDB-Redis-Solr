@@ -5,7 +5,7 @@ package com.sun.common.picUril;
 
 import java.io.FileInputStream;
 
-import com.sun.common.UrlConnectionHelper;
+import com.sun.common.ftp.UrlConnectionHelper;
 
 
 

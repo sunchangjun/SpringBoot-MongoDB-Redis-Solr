@@ -125,8 +125,12 @@ public class FtpUtils2 {
                 if (!ftpClient.changeWorkingDirectory(path)) {
                     this.createDirectorys(path);
                 }
-                // 设置被动模式，开通一个端口来传输数据
-                ftpClient.enterLocalPassiveMode();
+                /*主动模式*/
+                ftpClient.enterLocalActiveMode();
+                /* 设置被动模式，开通一个端口来传输数据*/
+//                ftpClient.enterLocalPassiveMode();
+                /*启用或禁用验证参与数据连接的远程主机与连接控制连接的主机相同的验证。*/
+                ftpClient.setRemoteVerificationEnabled(false);
                 // 上传文件
                 flag = ftpClient.storeFile(new String(fileName.getBytes(localCharset), serverCharset), fis);
             } catch (Exception e) {
@@ -633,11 +637,14 @@ public class FtpUtils2 {
     }
 
     public static void main(String[] args){
-        FtpUtils2 ftpUtils2 = new FtpUtils2("183.251.62.117", "wthxftpuser", "wthx1234");
+        FtpUtils2 ftpUtils2 = new FtpUtils2("47.98.153.144", "suncj", "scj19890606");
 //        boolean result = ftpUtils2.uploadLocalFile("/song/", "\\\\192.168.3.100\\qqmusic\\songs\\f\\f\\0a042cec178a45c486796a1d6fdeefc8.m4a", "a.txt");
 
 
-        boolean result = ftpUtils2.uploadRemoteFile("/song/", "http://service.recomusic.net/qqmusic/songs/g/h/7769ee4e5f064bbfb86170ff53f4d304.m4a", "test2.m4a");
-        System.out.println(result);
+        System.out.println("a");
+//        boolean result = ftpUtils2.uploadLocalFile("/user", "f://qqqqqqqqqqqqqqqqqqq.txt", "ccccccccccccccccc.txt");
+        boolean result =   ftpUtils2.downloadFiles("","D:/");
+            System.out.println(result);
+        System.out.println("b");
     }
 }
