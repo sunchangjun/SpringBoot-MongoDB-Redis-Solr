@@ -47,7 +47,6 @@ public class MyFtpUtil {
     private static String serverCharset = "ISO-8859-1";
 
     public FTPClient ftpClient = null;
-//    @Test
     public  void initFtpClient()   {
         try {
             ftpClient = new FTPClient();
@@ -82,16 +81,18 @@ public class MyFtpUtil {
     /**
      *
      * @param ftpPath  ftp上保存的目录
-     * @param savePath 本地文件目录(绝对路径带文件地址)
+     * @param localPath 本地文件目录(绝对路径带文件地址)
      * @param fileName  保存别名
      */
-    public  void uploadFie(String ftpPath, String savePath, String fileName){
+    public  boolean uploadFie(String ftpPath, String localPath, String fileName){
+        boolean flag =false;
         InputStream inputStream = null;
+
         try {
-            File file= new File(savePath);
             if (null == ftpClient){
                 initFtpClient();
             }
+            File file= new File(localPath);
             inputStream = new FileInputStream(file);
             // 设置编码：开启服务器对UTF-8的支持，如果服务器支持就用UTF-8编码，否则就使用本地编码（GBK）
             if (FTPReply.isPositiveCompletion(ftpClient.sendCommand(OPTS_UTF8, "ON"))) {
@@ -107,9 +108,12 @@ public class MyFtpUtil {
             ftpClient.setRemoteVerificationEnabled(false);
             /* 设置被动模式，开通一个端口来传输数据*/
 //           ftpClient.enterLocalPassiveMode();
-
-            boolean boo= ftpClient.storeFile(new String(fileName.getBytes(localCharset), serverCharset),inputStream);
-            logger.info(""+boo);
+            if(!ftpClient.changeWorkingDirectory(ftpPath)){
+                createDirectorys(ftpPath);
+            }
+            flag=    ftpClient.storeFile(ftpPath,inputStream);
+//            boolean boo= ftpClient.storeFile(new String(fileName.getBytes(localCharset), serverCharset),inputStream);
+            logger.info(""+flag);
         }catch(Exception e){
         e.printStackTrace();
         }finally {
@@ -120,7 +124,7 @@ public class MyFtpUtil {
                 e.printStackTrace();
             }
         }
-
+    return flag;
     }
     public String printWorkingDirectory(){
         String currPath= "";
