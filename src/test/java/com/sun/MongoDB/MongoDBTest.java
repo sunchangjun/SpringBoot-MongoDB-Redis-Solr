@@ -32,6 +32,19 @@ public class MongoDBTest extends BaseJunitTest {
         System.out.println(JSONObject.toJSONString(mongoReco));
 
     }
+    
+    
+    
+    @Test
+    public void testSave() {
+    	MongoSong song =new MongoSong();
+    	song.setSong_id(10086L);
+    	song.setAlbum_id(111L);
+    	song.setSong_name("测试数据");
+    	mongoTemplate.save(song);
+    	 System.out.println(JSONObject.toJSONString(mongoTemplate.findAll(MongoSong.class)));
+    	
+    }
 
     /**
      * 查询排序分页
@@ -63,7 +76,7 @@ public class MongoDBTest extends BaseJunitTest {
         List<MongoSong> mongoReco=   mongoTemplate.find(query, MongoSong.class);
         System.out.println(JSONObject.toJSONString(mongoReco));
     }
-    @Test
+//    @Test
     public void test4(){
         Map<String,Object> map =new HashMap<String,Object>();
         map.put("radio_ids",225);

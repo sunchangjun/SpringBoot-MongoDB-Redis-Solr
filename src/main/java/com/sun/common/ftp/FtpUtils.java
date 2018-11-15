@@ -66,12 +66,54 @@ public class FtpUtils {
                 System.out.println("connect failed...ftp服务器:"+this.userName+":"+this.port); 
             }
             System.out.println("connect successfu...ftp服务器:"+this.passWord+":"+this.port); 
+            /*启用或禁用验证参与数据连接的远程主机与连接控制连接的主机相同的验证。*/
+            ftpClient.setRemoteVerificationEnabled(false);
         }catch (MalformedURLException e) { 
            e.printStackTrace(); 
         }catch (IOException e) { 
            e.printStackTrace(); 
         } 
     }
+    
+    
+    public static void main(String[] args) {
+    	//TODO
+    }
+    /** * 下载文件 * 
+     * @param pathname FTP服务器文件目录 * 
+     * @param filename 文件名称 * 
+     * @param localpath 下载后的文件路径 * 
+     * @return */
+     public  void downloadFile(String ftpPathAndName, String renameFilename, String localpath){ 
+         OutputStream os=null;
+         try { 
+             System.out.println("开始下载文件");
+             initFtpClient(); 
+             
+             File localFile = new File(localpath + "/" + renameFilename); 
+             os = new FileOutputStream(localFile); 
+             ftpClient.retrieveFile(ftpPathAndName, os);  
+             System.out.println("下载文件成功");
+         } catch (Exception e) { 
+             System.out.println("下载文件失败");
+             e.printStackTrace(); 
+         } finally{ 
+             if(ftpClient.isConnected()){ 
+                 try{
+                     ftpClient.disconnect();
+                 }catch(IOException e){
+                     e.printStackTrace();
+                 }
+             } 
+             if(null != os){
+                 try {
+                     os.close();
+                 } catch (IOException e) {
+                     e.printStackTrace();
+                 } 
+             } 
+         } 
+     }
 
     /**
     * 上传文件
@@ -212,50 +254,7 @@ public class FtpUtils {
         return flag;
     }
     
-    /** * 下载文件 * 
-    * @param pathname FTP服务器文件目录 * 
-    * @param filename 文件名称 * 
-    * @param localpath 下载后的文件路径 * 
-    * @return */
-    public  void downloadFile(String pathname, String filename, String localpath){ 
-        OutputStream os=null;
-        try { 
-            System.out.println("开始下载文件");
-            initFtpClient();
-            //切换FTP目录 
-            ftpClient.enterLocalPassiveMode();
-            ftpClient.changeWorkingDirectory(pathname); 
-            FTPFile[] ftpFiles = ftpClient.listFiles(); 
-            for(FTPFile file : ftpFiles){ 
-                if(filename.equalsIgnoreCase(file.getName())){ 
-                    File localFile = new File(localpath + "/" + file.getName()); 
-                    os = new FileOutputStream(localFile); 
-                    ftpClient.retrieveFile(file.getName(), os); 
-                    os.close(); 
-                } 
-            } 
-            ftpClient.logout(); 
-            System.out.println("下载文件成功");
-        } catch (Exception e) { 
-            System.out.println("下载文件失败");
-            e.printStackTrace(); 
-        } finally{ 
-            if(ftpClient.isConnected()){ 
-                try{
-                    ftpClient.disconnect();
-                }catch(IOException e){
-                    e.printStackTrace();
-                }
-            } 
-            if(null != os){
-                try {
-                    os.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } 
-            } 
-        } 
-    }
+  
     
     /** * 删除文件 * 
     * @param pathname FTP服务器保存目录 * 
@@ -396,35 +395,5 @@ public class FtpUtils {
     }
     
     
-    public static void main(String[] args) {
-    	final String FTP_HOST = "183.251.62.117";
-        final Integer FTP_PORT = 21;
-        final String FTP_USER = "wthxftpuser";
-        final String FTP_PWD = "wthx1234";
-        
-        FtpUtils ftp = new FtpUtils(FTP_HOST, FTP_PORT, FTP_USER, FTP_PWD);
-        try {
-           if(ftp.uploadFile("/song/", "bbb.mp4", "\\\\192.168.3.100\\qqmusic\\songs\\f\\f\\0a042cec178a45c486796a1d6fdeefc8.m4a")){
-        	   System.out.println("成功");
-           }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-//        try {
-//			ftp.uploadFile("supertwj/kk", "apache-tomcat.zip", "E://apache-tomcat-8.0.51-windows-x64.zip");
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//        ftp.downloadFile("supertwj/kk", "apache-tomcat.zip", "F://");
-//        ftp.deleteFile("supertwj/kk", "apache-tomcat.zip");
-//        System.out.println("ok");
-//    	Map<String, String> themap = new HashMap<>();
-//    	themap.put("413.mp4", "F:/mv/413.mp4");
-//    	themap.put("472.mp4", "F:/mv/472.mp4");
-//    	themap.put("475.mp4", "F:/mv/475.mp4");
-//    	themap.put("494.mp4", "F:/mv/494.mp4");
-//    	ftp.uploadFileBatch("/mv", themap);
-    	
-    }
+
 }

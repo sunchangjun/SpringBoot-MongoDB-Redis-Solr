@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
+import redis.clients.jedis.JedisPubSub;
 import redis.clients.jedis.exceptions.JedisException;
 
 import java.io.*;
@@ -133,6 +134,46 @@ public class JedisUtils {
 			result= jedis.rpush(key,value);
 
 
+		} catch (Exception e) {
+			logger.info(e.getMessage());
+		} finally {
+			returnResource(jedis);
+		}
+		return result;
+	}
+	/**
+	 * 发送消息到频道
+	 * @param key
+	 * @param value
+	 * @return
+	 */
+	public static Long publish (String channer,String message) {
+		Long result = null;
+		Jedis jedis = null;
+		try {
+			jedis = getResource();
+			result= jedis.publish(channer,message);
+			
+			
+		} catch (Exception e) {
+			logger.info(e.getMessage());
+		} finally {
+			returnResource(jedis);
+		}
+		return result;
+	}
+	/**
+	 * 从频道接受消息
+	 * @param key
+	 * @param value
+	 * @return
+	 */
+	public static Long subscribe (JedisPubSub jedisPubSub,String channels) {
+		Long result = null;
+		Jedis jedis = null;
+		try {
+			jedis = getResource();
+			 jedis.subscribe(jedisPubSub, channels);
 		} catch (Exception e) {
 			logger.info(e.getMessage());
 		} finally {

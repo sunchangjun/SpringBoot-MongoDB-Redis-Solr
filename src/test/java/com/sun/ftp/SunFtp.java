@@ -17,6 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
+import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -114,8 +115,8 @@ public class SunFtp {
             if(!ftpClient.changeWorkingDirectory(ftpPath)){
                 createDirectorys(ftpPath);
             }
-            flag=    ftpClient.storeFile(ftpPath,inputStream);
-//            boolean boo= ftpClient.storeFile(new String(fileName.getBytes(localCharset), serverCharset),inputStream);
+//            flag=    ftpClient.storeFile(ftpPath,inputStream);
+            flag= ftpClient.storeFile(new String(fileName.getBytes(localCharset), serverCharset),inputStream);
             logger.info(""+flag);
         }catch(Exception e){
             e.printStackTrace();
@@ -400,27 +401,14 @@ public class SunFtp {
     }
     @Test
     public void test() throws IOException {
-//        renameFile("aaa.txt","bbb.txt");
-//        listRemoteAllFiles();
-//        makeDirectory("/sunchangjunn/sss");
-//        changeWorkingDirectory("/");
-//        listRemoteAllFiles();
-//      boolean b=  downloadFile("/sunchangjunn/sss","err.txt","G:\\down");
+    	//TODO
+
+//      downloadFiles("/song/2012645.jpg","G:\\down","2012645.jpg");
 //       logger.info("结果"+b);
 
-//        createDirectorys("/sunchangjunn/ssa");
-//        logger.info("当前路径:"+printWorkingDirectory());;
 
-//      boolean bool=  isDirExist("/sunchangjunn/sss/ccc");
-//        logger.info("结果"+bool);
-
-//        FTPFile [] ftpFiles =listDirectories("/");
-//        logger.info("结果"+ JSONObject.toJSONString(ftpFiles));
-//
-    boolean b =uploadFie("/user/sun","G:\\down\\err.txt","");
-        logger.info("结果"+b);
-//        makeDirectorys("/sunchangjunn/ccc/ddd");
     }
+ 
 
     /**创建目录*/
     public boolean makeDirectorys(String ftpPat){
@@ -478,10 +466,10 @@ public class SunFtp {
             ftpClient.setRemoteVerificationEnabled(false);
             FTPFile[] ftpFiles = ftpClient.listFiles();
             for(FTPFile file : ftpFiles){
-                if(filename.equalsIgnoreCase(file.getName())){
+                if(filename.equalsIgnoreCase(file.getName())){              	
                     File localFile = new File(localpath + "/" + file.getName());
                     os = new FileOutputStream(localFile);
-                    flag= ftpClient.retrieveFile(file.getName(), os);
+                    flag= ftpClient.retrieveFile(pathname, os);
                     os.close();
                 }
             }
