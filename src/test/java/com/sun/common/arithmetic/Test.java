@@ -15,6 +15,9 @@ public class Test {
 		System.out.println(i/j);
 		System.out.println(i%j);
 		
+		 String osName = System.getProperty("os.name");
+		 System.out.println(osName);
+		
 	}
 
 }

@@ -13,8 +13,8 @@ public class SynchronizeBookmarkToRedis {
 	private static final String localPath="D:\\File\\";
 
     public static void main(String[] args) {
-//        run("");
-        down();
+        run("bookmarks_2018_11_16");
+//        down();
     }
 
     /**

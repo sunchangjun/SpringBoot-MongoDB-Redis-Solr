@@ -7,6 +7,8 @@ import com.sun.common.jedis.RedisUtils;
 import org.junit.Test;
 
 import com.sun.common.jedis.JedisUtils;
+import com.sun.common.jedis.JedisUtils2;
+
 import redis.clients.jedis.Jedis;
 
 /**
@@ -70,9 +72,15 @@ public class RedisTest {
 		jedis.set("TABLE"+":"+"value","value");
 		JedisUtils.returnResource(jedis);
 	}
-	@Test
+//	@Test
 	public void testRedis2(){
 		RedisUtils.set("redis2","redis22");
 		JedisUtils.set("redis1","redis11");
+	}
+	
+	@Test
+	public void test3() {
+		JedisUtils2  jedis2=new JedisUtils2("47.98.153.144", "scj19890606") ;
+		jedis2.set("1111111111111", "22222222222222");
 	}
 }

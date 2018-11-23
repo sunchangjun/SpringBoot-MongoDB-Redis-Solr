@@ -185,6 +185,14 @@
 		    <artifactId>mybatis</artifactId>
 		    <version>3.4.6</version>
 		</dependency>
+		<!--webservice  -->
+		<!-- https://mvnrepository.com/artifact/soap/soap -->
+		<dependency>
+		    <groupId>soap</groupId>
+		    <artifactId>soap</artifactId>
+		    <version>2.3.1</version>
+		</dependency>
+
 		
 
 	</dependencies>

@@ -17,7 +17,7 @@ public class MsgListener extends JedisPubSub{
     @Override
     public void onMessage(String channel, String message) {       //收到消息会调用
         System.out.println(String.format("收到消息成功！ channel： %s, message： %s", channel, message));
-        this.unsubscribe();
+//        this.unsubscribe();
     }
  
     @Override
