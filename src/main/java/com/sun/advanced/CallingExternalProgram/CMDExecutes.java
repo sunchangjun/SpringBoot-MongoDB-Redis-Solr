@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.LineNumberReader;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,7 +24,7 @@ import com.alibaba.fastjson.JSONObject;
 public class CMDExecutes {
 	@Test
 	public void test3() {
-		System.out.println(executeCmd("cmd /c java"));;
+		System.out.println(executeCmd("cmd /c dir"));;
 		System.out.println("执行完毕");
 	}
 	
@@ -33,23 +34,34 @@ public class CMDExecutes {
         Map<String, String> lineMap = new HashMap<String, String>();//存放返回值
         try {
             Process proc = rt.exec(cmd);// 执行命令
-            InputStream stderr = proc.getInputStream();//执行结果 得到进程的标准输出信息流
-            InputStreamReader isr = new InputStreamReader(stderr);//将字节流转化成字符流
-            BufferedReader br = new BufferedReader(isr);//将字符流以缓存的形式一行一行输出
-            String line = null;
-            while ((line = br.readLine()) != null) { 
-                if (!StringUtils.isEmpty(line)) {
-                    String[] strLine = line.split(":");
-                    if(strLine.length>=2) {
-                    	System.out.println(strLine[1].trim());
-                        lineMap.put(strLine[0].trim(), strLine[1].trim());
-                    }
-                    
-                }
-            }
-            br.close();
-            isr.close();
-            stderr.close();
+            
+            
+            proc.getOutputStream().close();   
+            InputStreamReader ir = new InputStreamReader(proc.getInputStream());
+            BufferedReader br = new BufferedReader(ir);//将字符流以缓存的形式一行一行输出
+//            LineNumberReader input = new LineNumberReader(ir); 
+            String line = br.readLine();  
+            System.out.println(line);
+            if (line == null || line.length() < 10) {   
+                return null;   
+            }  
+//            InputStream stderr = proc.getInputStream();//执行结果 得到进程的标准输出信息流
+//            InputStreamReader isr = new InputStreamReader(stderr);//将字节流转化成字符流
+//            BufferedReader br = new BufferedReader(isr);//将字符流以缓存的形式一行一行输出
+//            String line = null;
+//            while ((line = br.readLine()) != null) { 
+//                if (!StringUtils.isEmpty(line)) {
+//                    String[] strLine = line.split(":");
+//                    if(strLine.length>=2) {
+//                    	System.out.println(strLine[1].trim());
+//                        lineMap.put(strLine[0].trim(), strLine[1].trim());
+//                    }
+//                    
+//                }
+//            }
+//            br.close();
+//            isr.close();
+//            stderr.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

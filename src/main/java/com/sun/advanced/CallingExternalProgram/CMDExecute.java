@@ -98,7 +98,7 @@ public class CMDExecute{
 
 		try {
 
-			result = cmdexe.run(args, "D://MyProject//colimas//axis_c");
+			result = cmdexe.run(args, "D: & dir");
 
 			System.out.println(result);
 
