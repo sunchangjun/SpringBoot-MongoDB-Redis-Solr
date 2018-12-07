@@ -32,7 +32,7 @@
 			<version>1.18</version>
 		</dependency>
 
-		<!--谷歌二维码生成工具-->
+		<!--谷歌二维码生成工具 -->
 		<dependency>
 			<groupId>com.google.zxing</groupId>
 			<artifactId>javase</artifactId>
@@ -69,7 +69,7 @@
 			<artifactId>commons-pool2</artifactId>
 		</dependency>
 
-		<!--mongodb-->
+		<!--mongodb -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-mongodb</artifactId>
@@ -77,7 +77,7 @@
 
 
 
-		<!--爬虫工具-->
+		<!--爬虫工具 -->
 		<dependency>
 			<groupId>net.sourceforge.htmlunit</groupId>
 			<artifactId>htmlunit</artifactId>
@@ -89,14 +89,14 @@
 			<version>1.8.3</version>
 		</dependency>
 
-		<!--solr-->
+		<!--solr -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-solr</artifactId>
 		</dependency>
 
 
-		<!--监控工具-->
+		<!--监控工具 -->
 		<dependency>
 			<groupId>de.codecentric</groupId>
 			<artifactId>spring-boot-admin-server</artifactId>
@@ -109,7 +109,7 @@
 		</dependency>
 
 
-		<!--http请求-->
+		<!--http请求 -->
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
@@ -121,7 +121,7 @@
 			<artifactId>okhttp</artifactId>
 			<version>3.8.1</version>
 		</dependency>
-		<!--Excel-->
+		<!--Excel -->
 		<dependency>
 			<groupId>net.sourceforge.jexcelapi</groupId>
 			<artifactId>jxl</artifactId>
@@ -129,17 +129,17 @@
 		</dependency>
 
 		<dependency>
-		    <groupId>org.apache.poi</groupId>
-		    <artifactId>poi</artifactId>
-		    <version>3.16</version>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.16</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.apache.poi</groupId>
-		    <artifactId>poi-ooxml</artifactId>
-		    <version>3.16</version>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.16</version>
 		</dependency>
-		
-		<!--FTP  -->
+
+		<!--FTP -->
 		<dependency>
 			<groupId>commons-net</groupId>
 			<artifactId>commons-net</artifactId>
@@ -150,12 +150,14 @@
 
 
 
-		<!--系统-->
+		<!--系统 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+			<version>2.0.6.RELEASE</version>
 		</dependency>
-		<!--热部署-->
+
+		<!--热部署 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -171,7 +173,7 @@
 
 
 
-		<!--工具-->
+		<!--工具 -->
 		<!--alijson -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
@@ -181,24 +183,39 @@
 
 		<!-- dao -->
 		<dependency>
-		    <groupId>org.mybatis</groupId>
-		    <artifactId>mybatis</artifactId>
-		    <version>3.4.6</version>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.4.6</version>
 		</dependency>
-		<!--webservice  -->
+		<!--webservice -->
 		<dependency>
-		    <groupId>soap</groupId>
-		    <artifactId>soap</artifactId>
-		    <version>2.3.1</version>
+			<groupId>soap</groupId>
+			<artifactId>soap</artifactId>
+			<version>2.3.1</version>
 		</dependency>
-		<!-- ssh:java调用linuxssh -->
 		<dependency>
-		    <groupId>com.jcraft</groupId>
-		    <artifactId>jsch</artifactId>
-		    <version>0.1.54</version>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-frontend-jaxws</artifactId>
+			<version>3.1.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.cxf</groupId>
+			<artifactId>cxf-rt-transports-http</artifactId>
+			<version>3.1.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web-services</artifactId>
 		</dependency>
 
-		
+		<!-- ssh:java调用linuxssh -->
+		<dependency>
+			<groupId>com.jcraft</groupId>
+			<artifactId>jsch</artifactId>
+			<version>0.1.54</version>
+		</dependency>
+
+
 
 	</dependencies>
 

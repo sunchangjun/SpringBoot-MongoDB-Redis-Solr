@@ -3,6 +3,8 @@
  */
 package com.sun.common.String;
 
+import java.util.UUID;
+
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
@@ -17,10 +19,17 @@ public class contains {
 //		boolean bool=StringUtils.contains(str, "<p> 代表作品");
 //		System.out.println(bool);
 
-		String one ="这一段话能否被匹配";
-
-		boolean bool=StringUtils.contains(one, "一段话");
-		System.out.println(bool);
+//		String one ="这一段话能否被匹配";
+//
+//		boolean bool=StringUtils.contains(one, "一段话");
+//		System.out.println(bool);
+		String CSPID="SP_QQYY";
+	 	  UUID uuid = UUID.randomUUID();
+  		  String uuidString=uuid.toString().replace("-", "");
+  		  String movieId=CSPID+uuidString.subSequence(CSPID.length(), uuidString.length());
+     System.out.println(movieId);
+		String two="SP_QQYYedfdb7403d9ef91c6c48272036";
+		System.out.println(movieId.length());
 	}
 
 }
