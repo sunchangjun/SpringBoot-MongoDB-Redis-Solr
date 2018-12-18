@@ -215,6 +215,13 @@
 			<version>0.1.54</version>
 		</dependency>
 
+		<!-- xml -->
+		<dependency>
+			<groupId>jdom</groupId>
+			<artifactId>jdom</artifactId>
+			<version>1.0</version>
+		</dependency>
+
 
 
 	</dependencies>
